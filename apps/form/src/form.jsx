@@ -107,9 +107,10 @@ function Form() {
                        onChange={
 
                            (e) => {
-                           console.log(e.target.value ? true : false);
-                               // !!e.target.value
-                               // e.target.value ? true : false
+                                console.log(e.target.value = true);
+                                // console.log(e.target.value ? true : false);
+                                // !!e.target.value;
+                                // e.target.value ? true : false;;
                            }
                        }
                 />
