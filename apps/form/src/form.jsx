@@ -8,7 +8,7 @@ function Form() {
         email: "",
         age: 0,
         msg: "",
-        isStudent: false,
+        isStudent: null,
     });
 
     // const year = new Date().getFullYear();
@@ -20,6 +20,7 @@ function Form() {
             [e.target.name]: e.target.value,
         });
     };
+
     const handleReset = () => {
         window.location.reload();
     }
@@ -48,13 +49,6 @@ function Form() {
 
         pdf.save(`${form.name + "submission"}.pdf`);
     }
-
-    console.log(form.isStudent);
-    // function isValid(){
-    //     if(!name.trim()) {
-    //         return "Name is required";
-    //     }
-    // }
 
     return (
         <div>
@@ -103,19 +97,26 @@ function Form() {
 
 
                 <p>Student: </p>
-                <input value={true} name="student" type="radio"
-                       onChange={
-
-                           (e) => {
-                                console.log(e.target.value = true);
-                                // console.log(e.target.value ? true : false);
-                                // !!e.target.value;
-                                // e.target.value ? true : false;;
-                           }
+                <input value={true} name="isStudent" type="radio" 
+                onChange={
+                    // handleChange.setForm(isStudent = true)
+                    // (e) => {console.log(e.target.value = true)}
+                            // console.log(e.target.value ? true : false);
+                            // !!e.target.value;
+                            // e.target.value ? true : false;;
+                    handleChange
                        }
                 />
                 <span>Yes</span>
-                <input value={false} name="student" type="radio" onChange={handleChange}/>
+                <input 
+                    value={false} 
+                    name="isStudent" 
+                    type="radio" 
+                    onChange={
+                        // handleChange.setForm(isStudent = false)
+                        // (e) => {console.log(e.target.value = false)}
+                        handleChange
+                        }/>
                 <span>No</span>
                 <p>Student : {
                     form.isStudent ? <b>"Yes"</b> : <b>"No"</b>
