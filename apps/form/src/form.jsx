@@ -30,8 +30,8 @@ function Form(){
         pdf.text("Form Submission" ,20, 20);
 
         pdf.setFontSize(12);
-        pdf.text(`Name: ${form.name}`, 20, 40);
-        pdf.text(`Email: ${form.email}`, 20, 50);
+        pdf.text(`Name: ${form.name}`, 30, 40);
+        pdf.text(`Email: ${form.email}`, 30, 50);
 
         pdf.text(`Message: ${form.msg}`, 20, 70);
 
