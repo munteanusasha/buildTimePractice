@@ -40,7 +40,7 @@ function Form(){
         const lines = pdf.splitTextToSize(form.msg, 170);
         pdf.text(lines, 20, 80);
 
-        pdf.save(`${form.name || "submission"}.pdf`);
+        pdf.save(`${form.name + "submission"}.pdf`);
     }
 
     // function isValid(){
