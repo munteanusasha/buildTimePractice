@@ -8,6 +8,7 @@ function Form(){
         email: "",
         age: 0,
         msg: "",
+        isStudent: false,
     });
 
     // const year = new Date().getFullYear();
@@ -40,6 +41,8 @@ function Form(){
         const lines = pdf.splitTextToSize(form.msg, 170);
         pdf.text(lines, 20, 80);
 
+        // pdf.text(`Student: ${}`);
+
         pdf.save(`${form.name + "submission"}.pdf`);
     }
 
@@ -60,7 +63,8 @@ function Form(){
             >
                 <label >Enter your Name: </label>
                 <input
-                    name="name"                    type="text"
+                    name="name"
+                    type="text"
                     placeholder="Name"
                     value={form.name}
                     onChange={
@@ -96,6 +100,12 @@ function Form(){
                 <p>Age: {form.age}</p>
                 <br/>
 
+                <p>Student: </p>
+                <input id="student" name="student" type="radio"/>
+
+                <p></p>
+                <input id="noStudent" name="student" type="radio"/>
+                <p>Student : {form.isStudent ? "Yes" : "No"}</p>
                 <textarea
                     // form="form"
                     name="msg"
