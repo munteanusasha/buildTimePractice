@@ -1,0 +1,26 @@
+{
+  "name": "learnreact",
+  "private": true,
+  "packageManager": "npm@10.9.2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "AlexM",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "turbo": "^2.11.6"
+  },
+  "dependencies": {
+    "jspdf": "^4.2.1"
+  }
+}
