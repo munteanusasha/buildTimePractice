@@ -152,3 +152,5 @@ vite.config.ts.timestamp-*
 #ssh
 AlexM
 AlexM.pub
+
+package-lock.json

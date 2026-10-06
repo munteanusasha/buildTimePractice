@@ -6,7 +6,8 @@ function Calculator(){
     const [input2, setInput2] = useState(0);
     const inputRef = useRef(null);
 
-    let result = eval(`${input2}+${input1}`);
+    let result = input2 + input1;
+        // eval(`${input2}+${input1}`);
 
     // const handlerInput =(e)=>{
     //

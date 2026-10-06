@@ -97,8 +97,12 @@ function Form() {
 
 
                 <p>Student: </p>
-                <input value={true} name="isStudent" type="radio" 
+                <input
+                    // value={true}
+                    name="isStudent"
+                    type="radio"
                 onChange={
+                        // e.target.isStudent = true // Modifying a variable defined outside a component or hook is not allowed. Consider using an effect.
                     // handleChange.setForm(isStudent = true)
                     // (e) => {console.log(e.target.value = true)}
                             // console.log(e.target.value ? true : false);
@@ -109,7 +113,7 @@ function Form() {
                 />
                 <span>Yes</span>
                 <input 
-                    value={false} 
+                    // value={false}
                     name="isStudent" 
                     type="radio" 
                     onChange={
