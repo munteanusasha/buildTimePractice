@@ -2,44 +2,70 @@ import {useState} from "react";
 
 export default function ShoppingList() {
 
-    const data=[
-        {
-            url:'https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/mffsycymuwolgltmlvaf?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MjU2LCJoZWlnaHQiOjI1Nn19XQ==',
-            title:'Oliva'
-        },
-        {
-            url:'https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/mffsycymuwolgltmlvaf?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MjU2LCJoZWlnaHQiOjI1Nn19XQ==',
-            title:'Oliva'
-        },
-        {
-            url:'https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/mffsycymuwolgltmlvaf?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MjU2LCJoZWlnaHQiOjI1Nn19XQ==',
-            title:'Oliva'
-        }
-    ]
-
+    // const data=[ // Amando example
+    //     {
+    //         url:'https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/mffsycymuwolgltmlvaf?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MjU2LCJoZWlnaHQiOjI1Nn19XQ==',
+    //         title:'Oliva'
+    //     },
+    //     {
+    //         url:'https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/mffsycymuwolgltmlvaf?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MjU2LCJoZWlnaHQiOjI1Nn19XQ==',
+    //         title:'Oliva'
+    //     },
+    //     {
+    //         url:'https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/mffsycymuwolgltmlvaf?t=W3sicmVzaXplIjp7Im1vZGUiOiJmaXQiLCJ3aWR0aCI6MjU2LCJoZWlnaHQiOjI1Nn19XQ==',
+    //         title:'Oliva'
+    //     }
+    // ]
 
     const [products, setProduct] = useState(initialProducts);
+    const total = 0;
 
-    const handleBought = (e) => {
-        console.log(e.target.bought);
-        setProduct(
-            products.map((product) => {
-                if (product.id === e.target.id) return e.target.bought = true;
-            })
+    // const handleBought = (e) => {
+    //     setProduct(
+    //         products.map((product) => {
+    //             if (product.id === e.target.id) return e.target.bought = true;
+    //         })
+    //     );
+    // };
+
+    // const handleBuy = (e) => {
+    //     setProduct(
+    //         products.map((product) =>
+    //         {
+    //             if (product.id === e.target.id) return e.target.bought = false;
+    //         })
+    //     );
+    // }
+
+    // const handleRemove = (e) => {
+        
+    //     setProduct(e.splice(e.target.id - 1, 1));
+    // }
+
+    const handleBought = (productId) => {
+        setProduct((currentProducts) =>
+            currentProducts.map((product) =>
+                product.id === productId ? { ...product, bought: true } : product
+            )
         );
     };
 
-    const handleBuy = (e) => {
-        setProduct(
-            products.map((product) =>
-            {
-                if (product.id === e.target.id) return e.target.bought = false;
-            })
+    const handleBuy = (productId) => {
+        setProduct((currentProducts) =>
+            currentProducts.map((product) =>
+                product.id === productId ? { ...product, bought: false } : product
+            )
         );
-    }
+    };
 
-    const handleRemove = (e) => {
-        setProduct(e.splice(e.target.id - 1, 1));
+    const handleRemove = (productId) => {
+        setProduct((currentProducts) =>
+            currentProducts.filter((product) => product.id !== productId)
+        );
+    };
+
+    const handleShowAll = (productId) => {
+
     }
 
     const listItems = products.map(
@@ -50,17 +76,14 @@ export default function ShoppingList() {
                     <li>{currency} {product.price}</li>
                     <li>{product.bought ? "Bought" : "Buy It"}</li>
                 </ul>
-                <button
-                    onClick={handleBuy}
-                >Buy
+                <button onClick={() => handleBuy(product.id)}>
+                    Buy
                 </button>
-                <button
-                    onClick={handleBought}
-                >Bought
+                <button onClick={() => handleBought(product.id)}>
+                    Bought
                 </button>
-                <button
-                    onClick={handleRemove}
-                >Remove
+                <button onClick={() => handleRemove(product.id)}>
+                    Remove
                 </button>
             </div>
         )
@@ -69,8 +92,13 @@ export default function ShoppingList() {
 
     return (
         <div id="shoppingList">
+            <button>Show All</button>
+            <button>Bought</button>
+            <button>To Buy</button>
+            <button>Add</button>
             {listItems}
-
+            <p>Total : {currency} {total}</p>
+            {/* // Armando Example
             <div style={{display:'flex',direction:"row",justifyContent:"space-around"}}>
                 { data.map((item)=>(
                     <div style={{width:'200px',borderRadius:'50%',border:"1px solid blue",overflow:'hidden'}} >
@@ -78,10 +106,7 @@ export default function ShoppingList() {
                         <p>{item.title}</p>
                     </div>
                 ))}
-
-            </div>
-
-
+            </div> */}
         </div>
     );
 
