@@ -10,7 +10,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/*<App />*/}
     {/*  <Calculator />*/}
-     {/* <Form /> */}
+    {/*  <Form />*/}
     <ShoppingList />
   </StrictMode>,
 

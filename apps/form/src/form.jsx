@@ -3,27 +3,35 @@ import {jsPDF} from "jspdf";
 
 function Form() {
 
-    const [form, setForm] = useState({
+    const initialForm = [{
         name: "",
         email: "",
         age: 0,
         msg: "",
-        isStudent: null,
-    });
+        isStudent: false,
+    }];
+    const [form, setForm] = useState(initialForm);
 
     // const year = new Date().getFullYear();
     // console.log(year)
 
     const handleChange = (e) => {
-        setForm({
+        const {name, value} = e.target; // AI
+
+        setForm({                       // transform into a callback handler function ??
             ...form,
+            [name] : name === "age" ? Number(value) : value, // AI
+            // [name] : name === "isStudent" ? !!value : !value, // use direct handler instead "onChange={()=>setForm({...form, isStudent: false})}"
             [e.target.name]: e.target.value,
         });
     };
 
+
     const handleReset = () => {
-        window.location.reload();
-    }
+        // window.location.reload();
+        // setForm((prevState, setForm())_ => {(prev)}); // make callback function to reset form
+        setForm(initialForm);
+    };
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -37,17 +45,15 @@ function Form() {
         pdf.setFontSize(12);
         pdf.text(`Name: ${form.name}`, 20, 40);
         pdf.text(`Email: ${form.email}`, 20, 50);
-
-        pdf.text(`Message: ${form.msg}`, 20, 70);
+        pdf.text(`Student: ${form.isStudent ? "yes" : "no"}`, 20, 60, );
+        pdf.text(`Message: ${form.msg}`, 20, 80);
 
         // Split long text  into multiple lines
 
         const lines = pdf.splitTextToSize(form.msg, 170);
-        pdf.text(lines, 20, 80);
+        pdf.text(lines, 20, 90);
 
-        pdf.text(`Student: ${form.isStudent ? "yes" : "no"}`);
-
-        pdf.save(`${form.name + "submission"}.pdf`);
+        pdf.save(`${form.name + "-submission"}.pdf`);
     }
 
     return (
@@ -67,7 +73,7 @@ function Form() {
                     value={form.name}
                     onChange={
                         handleChange
-                        // (e) => setName(e.target.value)
+                        // (e) => {setName(e.target.value)}
                     } required/>
 
                 <p>Name: {form.name}</p>
@@ -86,8 +92,8 @@ function Form() {
                 <label>Age :</label>
                 <input
                     type="number"
-                    name="date"
-                    value={form.date}
+                    name="age"
+                    value={form.age}
                     onChange={
                         // (e) => {setAge(year - Number(e.target.value.substring(0,4)));}
                         handleChange
@@ -98,44 +104,51 @@ function Form() {
 
                 <p>Student: </p>
                 <input
-                    // value={true}
+                    value="true"
                     name="isStudent"
                     type="radio"
                 onChange={
-                        // e.target.isStudent = true // Modifying a variable defined outside a component or hook is not allowed. Consider using an effect.
+                    ()=>setForm({...form, isStudent: true})
+// handleChange
+                    // e.target.isStudent = true // Modifying a variable defined outside a component or hook is not allowed. Consider using an effect.
                     // handleChange.setForm(isStudent = true)
                     // (e) => {console.log(e.target.value = true)}
                             // console.log(e.target.value ? true : false);
                             // !!e.target.value;
                             // e.target.value ? true : false;;
-                    handleChange
-                       }
+                    // (e) => {
+                    //     handleChange({
+                    //         target: {
+                    //             [e.target.isStudent] : !!e.target.value,
+                    //         }
+                    //     })}
+                }
                 />
                 <span>Yes</span>
                 <input 
-                    // value={false}
+                    value="false"
                     name="isStudent" 
-                    type="radio" 
+                    type="radio"
                     onChange={
-                        // handleChange.setForm(isStudent = false)
-                        // (e) => {console.log(e.target.value = false)}
-                        handleChange
-                        }/>
+                        ()=>setForm({...form, isStudent: false})
+                // handleChange
+                }/>
                 <span>No</span>
                 <p>Student : {
-                    form.isStudent ? <b>"Yes"</b> : <b>"No"</b>
+                    form.isStudent ? "Yes" : "No"
                 }</p>
                 <br/>
                 <textarea
                     // form="form"
                     name="msg"
                     placeholder="Your comments"
+                    value={form.msg}
                     onChange={
                         // (e) => setMsg(e.target.value)
                         handleChange
                     }>
                 </textarea>
-                <p>Comment: {form.msg}</p>
+                <p>Comment: ${form.msg}</p>
                 <br/>
                 <input type="submit"/>
                 Submit & Generate PDF

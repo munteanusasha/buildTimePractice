@@ -64,9 +64,9 @@ export default function ShoppingList() {
         );
     };
 
-    const handleShowAll = (productId) => {
-
-    }
+    // const handleShowAll = (productId) => {
+    //
+    // }
 
     const listItems = products.map(
         product => (
