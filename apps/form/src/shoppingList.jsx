@@ -89,6 +89,19 @@ export default function ShoppingList() {
         )
     );
 
+    // const [obj, setObj] = useState({
+    //     name: "Name",
+    //     gen: "gen",
+    // });
+    //
+    // const addObj = (e) => {
+    //     setObj(
+    //         ...obj,
+    //         [e.target.name] = e.target.value,
+    //         )
+    // };
+    //
+    // const showObj = obj.map(o => {o.name});
 
     return (
         <div id="shoppingList">
