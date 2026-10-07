@@ -21,7 +21,7 @@ function Form() {
         setForm({                       // transform into a callback handler function ??
             ...form,
             [name] : name === "age" ? Number(value) : value, // AI
-            // [name] : name === "isStudent" ? !!value : !value, // use direct handler instead "onChange={()=>setForm({...form, isStudent: false})}"
+            // [name] : name === "isStudent" ? value === "true" ? !!value : !value : !value, // use direct handler instead "onChange={()=>setForm({...form, isStudent: false})}"
             [e.target.name]: e.target.value,
         });
     };
