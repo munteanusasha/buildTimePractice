@@ -6,78 +6,149 @@ function App() {
 // ==========================================
 //                filter
 // ==========================================
-  {
-    const filter = ["spray", "limit", "elite", "exuberant", "destruction", "present"];
 
-    for (let item of filter) {
-      if (item.length > 6) {
-        console.log(item);
-      }
+    // const filterArr = ["spray", "limit", "elite", "exuberant", "destruction", "present"];
+    //
+    // function myFilter(arr){
+    //   for (let item of arr) {
+    //     if (item.length > 6) {
+    //       console.log(item);
+    //     }
+    //   }
+    // }
+    // myFilter(filterArr);
+
+    const arr = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+
+    function myFilter(arr, filter){
+        let result = [];
+
+        for(let i = 0; i < arr.length; i++){
+            if(filter(arr[i])){
+                result.push(arr[i]);
+            }
+        }
+        return result;
     }
-  }
+
+    const filtredArr = myFilter(arr, (item) => item.length > 6);
+    console.log(filtredArr);
 
 // ==========================================
 //                map
 // ==========================================
 
-  {
+
     const map = ['spray', 'limit'];
-    for (let i = 0; i < map.length; i++) {
-      const obj = {
-        id: i,
-        name: map[i],
+
+    function myMap(arr){
+      for (let i = 0; i < arr.length; i++) {
+        const obj = {
+          id: i,
+          name: arr[i],
+        }
+        console.log(obj);
       }
-      console.log(obj);
     }
-  }
+    myMap(map);
+
+
 // ==========================================
 //                find
 // ==========================================
 
-  {
+
     const find = [
       {id: 0, name: 'spray'},
       {id: 1, name: 'limit'},
     ];
     const id = 1;
 
-    for (let item of find) {
-      if (item.id === id) {
-        console.log(item);
+    function myFind(arr){
+      for (let item of arr) {
+        if (item.id === id) {
+          console.log(item);
+        }
       }
     }
-  }
+    myFind(find);
+
 
 // ==========================================
 //                concat
 // ==========================================
 
-  {
+
     const concat1 = ['spray', 'limit', 'elite'];
     const concat2 = ['exuberant', 'destruction', 'present'];
 
-    const finalConcat = [...concat1, ...concat2];
-    console.log(finalConcat);
-  }
+    function myConcat(arr1, arr2){
+      const finalConcat = [...arr1, ...arr2];
+      console.log(finalConcat);
+    }
+    myConcat(concat1, concat2);
+
 
 // ==========================================
 //                pipe
 // ==========================================
 
   const pipe = ['spray', 'limit', 'elite', 'exuberant', 'destruction'];
-  const pipeResult = [];
 
-  for(let i = 0; i < pipe.length; i++){
-    if(pipe[i].length > 6){
-      const obj = {
-        id: pipeResult.length,
-        name: pipe[i],
-      };
-      pipeResult.push(obj);
+  function myPipe( ...arr){
+
+    const pipeResult = [];
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].length > 6) {
+        const obj = {
+          id: pipeResult.length,
+          name: arr[i],
+        };
+        pipeResult.push(obj);
+      }
     }
+    console.log(pipeResult);
   }
-  console.log(pipeResult);
+  myPipe(pipe,[
+      myFilter((item) => item.length > 6),
+      myMap((item, index) => ({id:index, name: item})),
+  ]);
 
+// =======================================================
+// =======================================================
+// =======================================================
+
+  // function myFilter(arr){
+  //   for (let item of arr) {
+  //     if (item.length > 6) {
+  //       console.log(item);
+  //     }
+  //   }
+  // }
+  // function myMap(arr){
+  //   for (let i = 0; i < arr.length; i++) {
+  //     const obj = {
+  //       id: i,
+  //       name: arr[i],
+  //     }
+  //     console.log(obj);
+  //   }
+  // }
+  //
+  // function myPipe( ...arr){
+  //
+  //   const pipeResult = [];
+  //   for (let i = 0; i < arr.length; i++) {
+  //     if (arr[i].length > 6) {
+  //       const obj = {
+  //         id: pipeResult.length,
+  //         name: arr[i],
+  //       };
+  //       pipeResult.push(obj);
+  //     }
+  //   }
+  //   console.log(pipeResult);
+  // }
 // =======================================================
 // =======================================================
 // =======================================================
