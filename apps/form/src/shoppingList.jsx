@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useMemo, useState} from "react";
 
 export default function ShoppingList() {
 
@@ -18,6 +18,7 @@ export default function ShoppingList() {
     // ]
 
     const [products, setProduct] = useState(initialProducts);
+    const [counter, setCounter] = useState(0);
     const total = 0;
 
     // const handleBought = (e) => {
@@ -38,14 +39,14 @@ export default function ShoppingList() {
     // }
 
     // const handleRemove = (e) => {
-        
+
     //     setProduct(e.splice(e.target.id - 1, 1));
     // }
 
     const handleBought = (productId) => {
         setProduct((currentProducts) =>
             currentProducts.map((product) =>
-                product.id === productId ? { ...product, bought: true } : product
+                product.id === productId ? {...product, bought: true} : product
             )
         );
     };
@@ -53,7 +54,7 @@ export default function ShoppingList() {
     const handleBuy = (productId) => {
         setProduct((currentProducts) =>
             currentProducts.map((product) =>
-                product.id === productId ? { ...product, bought: false } : product
+                product.id === productId ? {...product, bought: false} : product
             )
         );
     };
@@ -68,25 +69,33 @@ export default function ShoppingList() {
     //
     // }
 
-    const listItems = products.map(
-        product => (
-            <div key={product.id}>
-                <ul>
-                    <li>{product.name}</li>
-                    <li>{currency} {product.price}</li>
-                    <li>{product.bought ? "Bought" : "Buy It"}</li>
-                </ul>
-                <button onClick={() => handleBuy(product.id)}>
-                    Buy
-                </button>
-                <button onClick={() => handleBought(product.id)}>
-                    Bought
-                </button>
-                <button onClick={() => handleRemove(product.id)}>
-                    Remove
-                </button>
-            </div>
-        )
+
+    const listItems = useMemo(
+        () => products.map(
+
+            product => {
+
+                console.log("test");
+
+                return (<div key={product.id}>
+                        <ul>
+                            <li>{product.name}</li>
+                            <li>{currency} {product.price}</li>
+                            <li>{product.bought ? "Bought" : "Buy It"}</li>
+                        </ul>
+                        <button onClick={() => handleBuy(product.id)}>
+                            Buy
+                        </button>
+                        <button onClick={() => handleBought(product.id)}>
+                            Bought
+                        </button>
+                        <button onClick={() => handleRemove(product.id)}>
+                            Remove
+                        </button>
+                    </div>
+                )
+            }
+        ), [products]
     );
 
     // const [obj, setObj] = useState({
@@ -111,6 +120,10 @@ export default function ShoppingList() {
             <button>Add</button>
             {listItems}
             <p>Total : {currency} {total}</p>
+
+            <button onClick={() => setCounter(prevState => prevState + 1)}>Counter {counter}</button>
+
+
             {/* // Armando Example
             <div style={{display:'flex',direction:"row",justifyContent:"space-around"}}>
                 { data.map((item)=>(
